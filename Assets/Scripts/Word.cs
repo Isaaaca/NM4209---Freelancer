@@ -26,8 +26,8 @@ public class Word : MonoBehaviour
     {
         value = word;
         wordText.text = word;
-        print(wordText.preferredWidth);
-        print(wordText.preferredHeight);
+        //print(wordText.preferredWidth);
+        //print(wordText.preferredHeight);
         GetComponent<BoxCollider2D>().size = new Vector2(wordText.preferredWidth, wordText.preferredHeight) * wordText.transform.lossyScale;
     }
 }
