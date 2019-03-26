@@ -25,7 +25,7 @@ public class PercentDisplay : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float currPercent = currAmt / totalAmt;
         //print(currAmt.ToString() + "/"+ totalAmt.ToString() + "=" +currPercent.ToString());
@@ -38,7 +38,7 @@ public class PercentDisplay : MonoBehaviour
             }
             else
             {
-                bar.fillAmount = Mathf.Clamp(bar.fillAmount + slowSpeed * Mathf.Sign(percentDiff), 0f, 100f); ;
+                bar.fillAmount = Mathf.Clamp(bar.fillAmount +  slowSpeed * Mathf.Sign(percentDiff), 0f, 100f); 
             }
         }
         else

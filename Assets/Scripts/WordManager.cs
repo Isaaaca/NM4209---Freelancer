@@ -60,6 +60,12 @@ public class WordManager : MonoBehaviour
         this.enabled = false;
     }
 
+    public void OnStartDay()
+    {
+        numWordsPiled = 0;
+        this.enabled = true;
+    }
+
     public void SubmitWord(string word)
     {
         GameObject wordTyped;
