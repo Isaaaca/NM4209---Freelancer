@@ -27,7 +27,7 @@ public class WordSpawner : MonoBehaviour
         float x = Random.Range(minX, maxX);
         this.transform.position = new Vector3(x, transform.position.y);
         GameObject w;
-        w = Instantiate(wordObject,this.transform.position, Quaternion.identity);
+        w = Instantiate(wordObject,this.transform.position, Quaternion.identity, transform.parent);
         w.GetComponent<Word>().SetWord(word);
 
         return w;

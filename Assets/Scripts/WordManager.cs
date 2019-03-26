@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WordManager : MonoBehaviour
 {
-    
+    public UnityEvent correctWordEvent = new UnityEvent();
+    public UnityEvent wrongWordEvent = new UnityEvent();
+
     public WordSpawner wordSpawner;
     public int minWords;
     public int numWordsToPile;
@@ -46,13 +49,29 @@ public class WordManager : MonoBehaviour
         activeWords.Clear();
     }
 
+    public void OnEndDay()
+    {
+
+        foreach(GameObject w in activeWords.Values)
+        {
+            Destroy(w);
+        }
+        activeWords.Clear();
+        this.enabled = false;
+    }
+
     public void SubmitWord(string word)
     {
-        GameObject wordTyped = activeWords[word];
-        if (wordTyped != null)
+        GameObject wordTyped;
+        if (activeWords.TryGetValue(word, out wordTyped))
         {
             activeWords.Remove(word);
             Destroy(wordTyped);
+            correctWordEvent.Invoke();
+        }
+        else
+        {
+            wrongWordEvent.Invoke();
         }
     }
 }

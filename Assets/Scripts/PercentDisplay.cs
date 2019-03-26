@@ -8,11 +8,14 @@ public class PercentDisplay : MonoBehaviour
 
     private Image bar;
     [SerializeField]
-    private float fastSpeed;
+    private float fastSpeed = 0.05f;
+    [SerializeField]
+    private float slowSpeed = 0.001f;
 
     private float currAmt;
     private float displayedPercent;
     private float totalAmt;
+    private bool fast;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +30,16 @@ public class PercentDisplay : MonoBehaviour
         float currPercent = currAmt / totalAmt;
         //print(currAmt.ToString() + "/"+ totalAmt.ToString() + "=" +currPercent.ToString());
         float percentDiff = currPercent - bar.fillAmount;
-        if (Mathf.Abs(percentDiff)> 0.05f)
+        if (Mathf.Abs(percentDiff) > 0.001)
         {
-            bar.fillAmount = Mathf.Clamp(bar.fillAmount + fastSpeed*Mathf.Sign(percentDiff), 0f, currPercent);
+            if (fast)
+            {
+                bar.fillAmount = Mathf.Clamp(bar.fillAmount + fastSpeed * Mathf.Sign(percentDiff), 0f, 100f);
+            }
+            else
+            {
+                bar.fillAmount = Mathf.Clamp(bar.fillAmount + slowSpeed * Mathf.Sign(percentDiff), 0f, 100f); ;
+            }
         }
         else
         {
@@ -47,6 +57,17 @@ public class PercentDisplay : MonoBehaviour
     public void Set(float newAmt)
     {
         currAmt = newAmt;
+        float currPercent = currAmt / totalAmt;
+        float percentDiff = currPercent - bar.fillAmount;
+        if (Mathf.Abs(percentDiff) > 0.05)
+        {
+            fast = true;
+        }
+        else
+        {
+            fast = false;  
+        }
+
     }
 
 }

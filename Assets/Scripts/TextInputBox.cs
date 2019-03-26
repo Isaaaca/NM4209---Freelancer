@@ -7,6 +7,8 @@ public class TextInputBox : MonoBehaviour
 {
     [SerializeField]
     InputField inputField;
+    [SerializeField]
+    private WordManager wordManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,13 +18,16 @@ public class TextInputBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(inputField.selectionAnchorPosition != inputField.selectionFocusPosition)inputField.MoveTextEnd(false);
     }
 
-    void Submit()
+    public void Submit(string word)
     {
-        inputField.text = "";
-        inputField.Select();
-
+        if(Input.GetKey(KeyCode.Return))
+        {
+            wordManager.SubmitWord(word);
+            inputField.text = "";
+        }
+        inputField.ActivateInputField();
     }
 }
