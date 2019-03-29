@@ -3,9 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+[System.Serializable]
+public class CorrectWordEvent : UnityEvent<int>
+{
+}
 public class WordManager : MonoBehaviour
 {
-    public UnityEvent correctWordEvent = new UnityEvent();
+    
+    public CorrectWordEvent correctWordEvent = new CorrectWordEvent();
     public UnityEvent wrongWordEvent = new UnityEvent();
 
     public WordSpawner wordSpawner;
@@ -15,8 +20,7 @@ public class WordManager : MonoBehaviour
     private int numWordsPiled = 0;
     SortedList<string, GameObject> activeWords;
 
-    private readonly string[] wordList_Sad = { "abysmal", "adverse", "alarming", "angry", "annoy", "anxious", "apathy", "appalling", "atrocious", "awful", "bad", "banal", "barbed", "belligerent", "bemoan", "beneath", "boring", "broken", "callous", "clumsy", "coarse", "cold", "collapse", "confused", "contradictory", "contrary", "corrosive", "corrupt", "crazy", "creepy", "criminal", "cruel", "cry", "cutting", "damage", "damaging", "dastardly", "dead", "decaying", "deformed", "deny", "deplorable", "depressed", "deprived", "despicable", "detrimental", "dirty", "disease", "disgusting", "disheveled", "dishonest", "dishonorable", "dismal", "distress", "dreadful", "dreary", "enraged", "eroding", "evil", "fail", "faulty", "fear", "feeble", "fight", "filthy", "foul", "frighten", "frightful", "gawky", "ghastly", "grave", "greed", "grim", "grimace", "gross", "grotesque", "gruesome", "guilty", "haggard", "hard", "harmful", "hate", "hideous", "homely", "horrendous", "horrible", "hostile", "hurt", "hurtful", "icky", "ignorant", "ignore", "ill", "immature", "imperfect", "impossible", "inane", "inelegant", "infernal", "injure", "injurious", "insane", "insidious", "insipid", "jealous", "junky", "lose", "lousy", "lumpy", "malicious", "mean", "menacing", "messy", "misshapen", "missing", "misunderstood", "moan", "moldy", "monstrous", "naive", "nasty", "naughty", "negate", "negative", "never", "no", "nobody", "nondescript", "nonsense", "not", "noxious", "objectionable", "odious", "offensive", "old", "oppressive", "pain", "perturb", "pessimistic", "petty", "plain", "poisonous", "poor", "prejudice", "questionable", "quirky", "quit", "reject", "renege", "repellant", "reptilian", "repugnant", "repulsive", "revenge", "revolting", "rocky", "rotten", "rude", "ruthless", "sad", "savage", "scare", "scary", "scream", "severe", "shocking", "shoddy", "sick", "sickening", "sinister", "slimy", "smelly", "sobbing", "sorry", "spiteful", "sticky", "stinky", "stormy", "stressful", "stuck", "stupid", "substandard", "suspect", "suspicious", "tense", "terrible", "terrifying", "threatening", "ugly", "undermine", "unfair", "unfavorable", "unhappy", "unhealthy", "unjust", "unlucky", "unpleasant", "unsatisfactory", "unsightly", "untoward", "unwanted", "unwelcome", "unwholesome", "unwieldy", "unwise", "upset", "vice", "vicious", "vile", "villainous", "vindictive", "wary", "weary", "wicked", "woeful", "worthless", "wound", "yell", "yucky", "zero" };
-   
+    private readonly string[] wordList_Sad = { "bad", "cry", "ill", "not", "old", "sad", "cold", "dead", "deny", "evil", "fail", "fear", "foul", "grim", "hard", "hate", "hurt", "icky", "lose", "mean", "moan", "pain", "poor", "quit", "rude", "sick", "ugly", "vice", "vile", "wary", "yell", "zero", "angry", "annoy", "awful", "banal", "crazy", "cruel", "dirty", "fight", "gawky", "grave", "greed", "gross", "inane", "junky", "lousy", "lumpy", "messy", "moldy", "naive", "nasty", "never", "petty", "plain", "rocky", "scare", "scary", "slimy", "sorry", "stuck", "tense", "upset", "weary", "wound", "yucky", "apathy", "barbed", "bemoan", "boring", "broken", "clumsy", "coarse", "creepy", "damage", "dismal", "dreary", "faulty", "feeble", "filthy", "guilty", "homely", "ignore", "injure", "insane", "negate", "nobody", "odious", "quirky", "reject", "renege", "rotten", "savage", "scream", "severe", "shoddy", "smelly", "sticky", "stinky", "stormy", "stupid", "unfair", "unjust", "unwise", "wicked", "woeful", "abysmal", "adverse", "anxious", "beneath", "callous", "corrupt", "cutting", "disease", "enraged", "eroding", "ghastly", "grimace", "haggard", "harmful", "hideous", "hostile", "hurtful", "insipid", "jealous", "missing", "naughty", "noxious", "perturb", "revenge", "sobbing", "suspect", "unhappy", "unlucky", "vicious", "alarming", "collapse", "confused", "contrary", "criminal", "damaging", "decaying", "deformed", "deprived", "distress", "dreadful", "frighten", "gruesome", "horrible", "ignorant", "immature", "infernal", "menacing", "negative", "nonsense", "ruthless", "shocking", "sinister", "spiteful", "terrible", "untoward", "unwanted", "unwieldy", "appalling", "atrocious", "corrosive", "dastardly", "depressed", "dishonest", "frightful", "grotesque", "imperfect", "inelegant", "injurious", "insidious", "malicious", "misshapen", "monstrous", "offensive", "poisonous", "prejudice", "repellant", "reptilian", "repugnant", "repulsive", "revolting", "sickening", "stressful", "undermine", "unhealthy", "unsightly", "unwelcome", "worthless", "deplorable", "despicable", "disgusting", "disheveled", "horrendous", "impossible", "oppressive", "suspicious", "terrifying", "unpleasant", "villainous", "vindictive", "belligerent", "detrimental", "nondescript", "pessimistic", "substandard", "threatening", "unfavorable", "unwholesome", "dishonorable", "questionable", "contradictory", "misunderstood", "objectionable", "unsatisfactory" };
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +77,7 @@ public class WordManager : MonoBehaviour
         {
             activeWords.Remove(word);
             Destroy(wordTyped);
-            correctWordEvent.Invoke();
+            correctWordEvent.Invoke(word.Length);
         }
         else
         {

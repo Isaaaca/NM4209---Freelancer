@@ -21,6 +21,10 @@ public class PanelControl : MonoBehaviour
     {
         Animator animator = GetComponent<Animator>();
         animator.SetBool("open", true);
+        foreach (UpgradeButton b in GetComponentsInChildren<UpgradeButton>())
+        {
+            b.enabled = true;
+        }
 
     }
 
@@ -28,6 +32,10 @@ public class PanelControl : MonoBehaviour
     {
         Animator animator = GetComponent<Animator>();
         animator.SetBool("open", false);
+        foreach (UpgradeButton b in GetComponentsInChildren<UpgradeButton>())
+        {
+            b.enabled = false;
+        }
 
     }
 }

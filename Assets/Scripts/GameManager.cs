@@ -24,14 +24,14 @@ public class GameManager : MonoBehaviour
     public int cashReward;
     public int cashPenalty;
     public int rentAmt;
-    
+
     [Header("Starting Amounts")]
     [SerializeField]
     private float dayDuration;
     [SerializeField]
     private int startMoney;
     [SerializeField]
-    private float startSanity; 
+    private float startSanity;
 
     [Header("Base Coffee")]
     [SerializeField]
@@ -58,8 +58,6 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     InputField inputField;
     private float dayTimeLeft;
-    private float sanity;
-    private int money;
 
     [SerializeField]
     private bool isDay;
@@ -72,26 +70,30 @@ public class GameManager : MonoBehaviour
         isDay = true;
     }
 
-    public void OnCorrectWord()
+    public void OnCorrectWord(int wordLen)
     {
-        if(drainSainityPerWord)
-            DecreaseSanity(rightWordSanityDrain);
-
-        IncreaseMoney(cashReward);
+        if (drainSainityPerWord)
+            Resources.DecreaseSanity(rightWordSanityDrain);
+        if (Upgrades.hasUpgrade("rightfulPay"))
+        {
+            int multiplier =Mathf.Max(1, wordLen / 4);
+            Resources.IncreaseMoney(cashReward * multiplier);
+        }
+        else Resources.IncreaseMoney(cashReward);
     }
     public void OnWrongWord()
     {
         if (drainSainityPerWord)
-            DecreaseSanity(wrongWordSanityDrain);
-        DecreaseMoney(cashPenalty);
+            Resources.DecreaseSanity(wrongWordSanityDrain);
+        Resources.DecreaseMoney(cashPenalty);
     }
 
     public void OnCoffee()
     {
-        if (money > coffeeMoney)
+        if (Resources.money > coffeeMoney)
         {
-            IncreaseSanity(coffeeSanity);
-            DecreaseMoney(coffeeMoney);
+            Resources.IncreaseSanity(coffeeSanity);
+            Resources.DecreaseMoney(coffeeMoney);
             DecreaseTime(coffeeTime);
         }
     }
@@ -99,20 +101,21 @@ public class GameManager : MonoBehaviour
     {
         if (dayTimeLeft > napTime)
         {
-            IncreaseSanity(napSanity);
+            Resources.IncreaseSanity(napSanity);
             DecreaseTime(napTime);
         }
         else
         {
-            IncreaseSanity(dayTimeLeft / napTime * napSanity);
+            Resources.IncreaseSanity(dayTimeLeft / napTime * napSanity);
             DecreaseTime(dayTimeLeft);
         }
     }
 
     public void PayRent()
     {
-        DecreaseMoney(rentAmt);
+        Resources.DecreaseMoney(rentAmt);
     }
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -124,10 +127,10 @@ public class GameManager : MonoBehaviour
 
         EndDayEvent.AddListener(OnEndDay);
         clock.Initialize(dayDuration, dayDuration);
-        sanity = startSanity;
+        Resources.sanity = startSanity;
         sanityBar.Initialize(startSanity, 100);
-        money = startMoney;
-        cashDisplay.text = "$" + money.ToString();
+        Resources.money = startMoney;
+        cashDisplay.text = "$" + Resources.money.ToString();
         StartDay();
     }
 
@@ -141,18 +144,24 @@ public class GameManager : MonoBehaviour
 
             if (drainSanityOverTime)
             {
-                DecreaseSanity(Time.deltaTime*drainRate);
+                Resources.DecreaseSanity(Time.deltaTime * drainRate);
             }
+            clock.Set(dayTimeLeft);
         }
-        if (sanity <= 0)
+        if (Resources.sanity <= 0)
         {
-            sanity = 0;
+            Resources.sanity = 0;
             EndDayEvent.Invoke();
         }
         if (drainSanityOnKeypress && Input.inputString != "")
         {
-            DecreaseSanity(sanityDrainPerKey);
+            Resources.DecreaseSanity(sanityDrainPerKey);
         }
+
+        //Update UI
+        sanityBar.Set(Resources.sanity);
+        cashDisplay.text = "$" + Resources.money.ToString();
+
     }
 
 
@@ -164,34 +173,12 @@ public class GameManager : MonoBehaviour
         {
             //show dialogue for day ending due to sanity 
         }
-    }
-
-
-    private void DecreaseSanity(float amt)
-    {
-        sanity = Mathf.Clamp(sanity-amt, 0f, 100f);
-        sanityBar.Set(sanity);
-    }
-    private void IncreaseSanity(float amt)
-    {
-        sanity = Mathf.Clamp(sanity + amt, 0f, 100f);
-        sanityBar.Set(sanity);
+        Resources.IncreaseSanity(60f);
     }
 
     private void DecreaseTime(float amt)
     {
         dayTimeLeft = Mathf.Clamp(dayTimeLeft - amt, 0f, 100f);
-        clock.Set(dayTimeLeft);
-    }
 
-    private void IncreaseMoney(int amt)
-    {
-        money += amt;
-        cashDisplay.text = "$" + money.ToString();
-    }
-    private void DecreaseMoney(int amt)
-    {
-        money -= amt;
-        cashDisplay.text = "$" + money.ToString();
     }
 }
