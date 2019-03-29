@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
             sanity = 0;
             EndDayEvent.Invoke();
         }
-        if(drainSanityOnKeypress && Input.anyKeyDown)
+        if (drainSanityOnKeypress && Input.inputString != "")
         {
             DecreaseSanity(sanityDrainPerKey);
         }
