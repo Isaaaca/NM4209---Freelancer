@@ -223,3 +223,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: 
   lockingUpgrade: {fileID: 0}
+  precludingUpgrade: {fileID: 0}

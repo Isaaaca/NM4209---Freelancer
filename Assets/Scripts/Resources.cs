@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class Resources
 {
-    public static int money;
+    public static float money =20;
     public static float sanity;
 
     public static void DecreaseSanity(float amt)
@@ -16,11 +16,11 @@ public static class Resources
         sanity = Mathf.Clamp(sanity + amt, 0f, 100f);
     }
 
-    public static void IncreaseMoney(int amt)
+    public static void IncreaseMoney(float amt)
     {
         money += amt;
     }
-    public static void DecreaseMoney(int amt)
+    public static void DecreaseMoney(float amt)
     {
         money -= amt;
     }

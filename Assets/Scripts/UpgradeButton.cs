@@ -10,6 +10,8 @@ public class UpgradeButton : MonoBehaviour
 
     [SerializeField]
     private UpgradeButton lockingUpgrade;
+    [SerializeField]
+    private UpgradeButton precludingUpgrade;
 
     private bool activated;
     private Button button;
@@ -45,8 +47,12 @@ public class UpgradeButton : MonoBehaviour
 
     void Update()
     {
+        if (activated||(precludingUpgrade != null && precludingUpgrade.isActivated()))
+        {
+            button.interactable = false;
+        }
 
-        if (lockingUpgrade != null && !activated)
+        else if (lockingUpgrade != null && !activated)
         {
             bool unlocked = lockingUpgrade.isActivated();
             if (unlocked)
@@ -59,8 +65,11 @@ public class UpgradeButton : MonoBehaviour
                 else
                 {
                     //show not enough cash
+                    button.interactable = false;
                 }
             }
         }
+        else
+            button.interactable = false;
     }
 }
