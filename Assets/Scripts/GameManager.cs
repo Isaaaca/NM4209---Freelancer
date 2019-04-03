@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     [Header("Money flow")]
     public float cashReward;
     public float cashPenalty;
-    public float rentAmt;
+    public float startRentAmt;
     public float rentIncrease;
 
     [Header("Starting Amounts")]
@@ -59,10 +59,13 @@ public class GameManager : MonoBehaviour
     private CashText cashDisplay;
     [SerializeField]
     private Text dayDisplay;
+    [SerializeField]
+    private SummaryPanel summaryPanel;
 
     [SerializeField]
     InputField inputField;
     private float dayTimeLeft;
+    
     private float lastRightWordTime =0;
     private float spentSanity = 0;
     private int day =0;
@@ -70,106 +73,6 @@ public class GameManager : MonoBehaviour
     private bool hitBackspace = false;
     private bool isDay;
 
-    public void StartDay()
-    {
-        day++;
-        if (day % 5 == 0)
-            rentAmt += rentIncrease;
-        StartDayEvent.Invoke();
-        dayTimeLeft = dayDuration;
-        inputField.Select();
-        dayDisplay.text = "Day " + day.ToString();
-        isDay = true;
-    }
-    void OnEndDay()
-    {
-        print("dayended");
-        isDay = false;
-        if (dayTimeLeft > 0)
-        {
-            //show dialogue for day ending due to sanity 
-        }
-        PayRent();
-        Resources.IncreaseSanity(nightSanity);
-    }
-
-
-    public void OnCorrectWord(int wordLen)
-    {
-        if (drainSainityPerWord)
-            Resources.DecreaseSanity(rightWordSanityDrain);
-
-        float pay = cashReward;
-        if (Upgrades.hasUpgrade("rightfulPay"))
-        {
-            int multiplier =Mathf.Max(1, wordLen / 4);
-            pay *= multiplier;
-            if (Upgrades.hasUpgrade("longerWords")&& wordLen>=8)
-            {
-                if (Upgrades.hasUpgrade("onlyLongWords") && !hitBackspace)
-                    pay *= 2;
-                else
-                    pay *= 1.5f;
-            }
-            else if(Upgrades.hasUpgrade("shorterWords") && Upgrades.hasUpgrade("onlyShortWords"))
-            {
-                print(Time.time - lastRightWordTime);
-                if (Time.time - lastRightWordTime < 2)
-                {
-                    pay *= 1.4f;
-                }
-
-            }
-        }
-        Resources.IncreaseMoney(pay);
-        hitBackspace = false;
-        lastRightWordTime = Time.time;
-
-        if (Upgrades.hasUpgrade("positiveMindset"))
-        {
-            Resources.IncreaseSanity(spentSanity * 0.5f);
-
-        }
-        spentSanity = 0;
-
-    }
-    public void OnWrongWord()
-    {
-        if (drainSainityPerWord)
-            Resources.DecreaseSanity(wrongWordSanityDrain);
-        Resources.DecreaseMoney(cashPenalty);
-        hitBackspace = false;
-        spentSanity = 0;
-    }
-
-    public void OnCoffee()
-    {
-        if (Resources.money > coffeeMoney)
-        {
-            Resources.IncreaseSanity(coffeeSanity);
-            Resources.DecreaseMoney(coffeeMoney);
-            DecreaseTime(coffeeTime);
-        }
-    }
-    public void OnNap()
-    {
-        if (dayTimeLeft > napTime)
-        {
-            Resources.IncreaseSanity(napSanity);
-            DecreaseTime(napTime);
-        }
-        else
-        {
-            Resources.IncreaseSanity(dayTimeLeft / napTime * napSanity);
-            DecreaseTime(dayTimeLeft);
-        }
-    }
-
-    public void PayRent()
-    {
-        Resources.DecreaseMoney(rentAmt);
-    }
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -185,6 +88,7 @@ public class GameManager : MonoBehaviour
         sanityBar.Initialize(startSanity, 100);
         Resources.money = startMoney;
         cashDisplay.Refresh();
+        Resources.rentAmt = startRentAmt;
         StartDay();
     }
 
@@ -219,8 +123,8 @@ public class GameManager : MonoBehaviour
                 hitBackspace = true;
             }
         }
-       
-        
+
+
 
         //Update UI
         sanityBar.Set(Resources.sanity);
@@ -229,6 +133,130 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void StartDay()
+    {
+        day++;
+        StartDayEvent.Invoke();
+        dayTimeLeft = dayDuration;
+        inputField.Select();
+        dayDisplay.text = "Day " + day.ToString();
+        isDay = true;
+        Resources.daysEarnings = 0;
+        Resources.daysBonus = 0;
+        Resources.daysPenalty = 0;
+        Resources.coffeeExpenditure = 0;
+        Resources.numRightWords = 0;
+        Resources.numWrongWords = 0;
+    }
+    void OnEndDay()
+    {
+        isDay = false;
+        System.Text.StringBuilder builder = new System.Text.StringBuilder();
+        if (dayTimeLeft > 0)
+        {
+            //show dialogue for day ending due to sanity 
+            builder.Append("You got fed up with work and spent the rest of the day on Netflix. Remember to take breaks next time.\n");
+        }
+        else
+        {
+            builder.Append("Yet another day passes.\n");
+        }
+        if (day % 5 == 0)
+        {
+            builder.Append("Landlady increased the rent. Again.\n");
+            Resources.rentAmt += rentIncrease;
+        }
+        PayRent();
+        summaryPanel.Set(builder.ToString());
+        Resources.IncreaseSanity(nightSanity);
+    }
+
+
+    public void OnCorrectWord(int wordLen)
+    {
+        if (drainSainityPerWord)
+            Resources.DecreaseSanity(rightWordSanityDrain);
+
+        float pay = cashReward;
+        float bonus = 0;
+        if (Upgrades.hasUpgrade("rightfulPay"))
+        {
+            int multiplier =Mathf.Max(1, wordLen / 4);
+            pay *= multiplier;
+            if (Upgrades.hasUpgrade("longerWords")&& wordLen>=8)
+            {
+                if (Upgrades.hasUpgrade("onlyLongWords") && !hitBackspace)
+                    bonus = pay * 0.6f;
+                else
+                    bonus = pay * 0.2f;
+            }
+            else if(Upgrades.hasUpgrade("shorterWords") && Upgrades.hasUpgrade("onlyShortWords"))
+            {
+                print(Time.time - lastRightWordTime);
+                if (Time.time - lastRightWordTime < 2)
+                {
+                    bonus = pay * 0.4f;
+                }
+
+            }
+        }
+        Resources.IncreaseMoney(pay + bonus);
+        hitBackspace = false;
+        lastRightWordTime = Time.time;
+
+        if (Upgrades.hasUpgrade("positiveMindset"))
+        {
+            Resources.IncreaseSanity(spentSanity * 0.5f);
+
+        }
+
+        spentSanity = 0;
+        Resources.daysEarnings += pay;
+        Resources.daysBonus += bonus;
+        Resources.numRightWords ++;
+
+    }
+    public void OnWrongWord()
+    {
+        if (drainSainityPerWord)
+            Resources.DecreaseSanity(wrongWordSanityDrain);
+        Resources.DecreaseMoney(cashPenalty);
+        hitBackspace = false;
+        spentSanity = 0;
+        Resources.daysPenalty += cashPenalty;
+        Resources.numWrongWords++;
+    }
+
+    public void OnCoffee()
+    {
+        if (Resources.money > coffeeMoney)
+        {
+            Resources.IncreaseSanity(coffeeSanity);
+            Resources.DecreaseMoney(coffeeMoney);
+            DecreaseTime(coffeeTime);
+            Resources.coffeeExpenditure += coffeeMoney;
+        }
+    }
+    public void OnNap()
+    {
+        if (dayTimeLeft > napTime)
+        {
+            Resources.IncreaseSanity(napSanity);
+            DecreaseTime(napTime);
+        }
+        else
+        {
+            Resources.IncreaseSanity(dayTimeLeft / napTime * napSanity);
+            DecreaseTime(dayTimeLeft);
+        }
+    }
+
+    public void PayRent()
+    {
+        Resources.DecreaseMoney(Resources.rentAmt);
+    }
+    
+  
 
   
     private void DecreaseTime(float amt)

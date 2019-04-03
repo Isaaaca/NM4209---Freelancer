@@ -5,30 +5,28 @@ using UnityEngine.UI;
 
 public class UpgradeButton : MonoBehaviour
 {
-    [SerializeField]
-    private string upgradeName;
+    public string upgradeName;
 
     [SerializeField]
     private UpgradeButton lockingUpgrade;
     [SerializeField]
     private UpgradeButton precludingUpgrade;
 
+
     private bool activated;
     private Button button;
+    private Sprite sprite;
     // Start is called before the first frame update
     void Start()
     {
         button = this.GetComponent<Button>();
+        sprite = button.image.sprite;
         activated = Upgrades.hasUpgrade(upgradeName);
         if (lockingUpgrade != null)
         {
             button.interactable = false;
         }
 
-    }
-
-    public void CheckUnlock()
-    {
     }
 
     public void Activate()
@@ -43,6 +41,11 @@ public class UpgradeButton : MonoBehaviour
     public bool isActivated()
     {
         return activated;
+    }
+
+    public Sprite GetSprite()
+    {
+        return sprite;
     }
 
     void Update()

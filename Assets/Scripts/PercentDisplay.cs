@@ -11,6 +11,10 @@ public class PercentDisplay : MonoBehaviour
     private float fastSpeed = 0.05f;
     [SerializeField]
     private float slowSpeed = 0.001f;
+    [SerializeField]
+    private Color fullColor;
+    [SerializeField]
+    private Color emptyColor;
 
     private float currAmt;
     private float displayedPercent;
@@ -22,6 +26,7 @@ public class PercentDisplay : MonoBehaviour
     {
         bar = this.GetComponent<Image>();
         displayedPercent = 1;
+        bar.color = fullColor;
     }
 
     // Update is called once per frame
@@ -34,12 +39,13 @@ public class PercentDisplay : MonoBehaviour
         {
             if (fast)
             {
-                bar.fillAmount = Mathf.Clamp(bar.fillAmount + fastSpeed * Mathf.Sign(percentDiff), 0f, 100f);
+                bar.fillAmount = Mathf.Clamp(bar.fillAmount + fastSpeed * Mathf.Abs(percentDiff) * Mathf.Sign(percentDiff), 0f, 100f);
             }
             else
             {
-                bar.fillAmount = Mathf.Clamp(bar.fillAmount +  slowSpeed * Mathf.Sign(percentDiff), 0f, 100f); 
+                bar.fillAmount = Mathf.Clamp(bar.fillAmount +  slowSpeed * Mathf.Abs(percentDiff) * Mathf.Sign(percentDiff), 0f, 100f); 
             }
+            bar.color = fullColor * bar.fillAmount + emptyColor * (1 - bar.fillAmount);
         }
         else
         {

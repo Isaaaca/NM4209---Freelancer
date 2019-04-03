@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 4692299092244268667}
   - component: {fileID: 4692299092244268666}
   - component: {fileID: 4692299092244268669}
+  - component: {fileID: 2465990486184518183}
   m_Layer: 5
   m_Name: UpgradeButton
   m_TagString: Untagged
@@ -224,3 +225,16 @@ MonoBehaviour:
   upgradeName: 
   lockingUpgrade: {fileID: 0}
   precludingUpgrade: {fileID: 0}
+--- !u!114 &2465990486184518183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4692299092244268664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 170908f12c0211449b9106313bd7c4bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverObject: {fileID: 4692299092244268664}

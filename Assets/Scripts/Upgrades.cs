@@ -6,17 +6,17 @@ public static class Upgrades
 {
     private static Dictionary<string, bool> upgradeList = new Dictionary<string, bool>
         {
-            { "rightfulPay", true },
+            { "rightfulPay", false },
             { "shorterWords", false },
             { "onlyShortWords", false },
-            { "longerWords", true },
-            { "onlyLongWords", true },
+            { "longerWords", false },
+            { "onlyLongWords", false },
 
             { "positiveMindset", false },
             { "romanticMindset", false },
 
-            { "wordGrid", true },
-            { "rigidWords", true },
+            { "wordGrid", false },
+            { "rigidWords", false },
 
             { "betterCoffee", false },
             { "betterNap", false }
@@ -38,6 +38,36 @@ public static class Upgrades
 
             { "betterCoffee", 50 },
             { "betterNap", 50 }
+        };
+
+    private static  Dictionary<string, string> upgradeTitle = new Dictionary<string, string>
+        {
+            { "rightfulPay", "rightfulPay" },
+            { "shorterWords", "shorterWords" },
+            { "onlyShortWords", "onlyShortWords"},
+            { "longerWords", "longerWords"},
+            { "onlyLongWords", "onlyLongWords" },
+
+            { "positiveMindset", "positiveMindset" },
+            { "romanticMindset", "romanticMindset" },
+
+            { "wordGrid", "wordGrid" },
+            { "rigidWords", "rigidWords" }
+        };
+
+    private static  Dictionary<string, string> upgradeDescription = new Dictionary<string, string>
+        {
+            { "rightfulPay", "rightfulPay" },
+            { "shorterWords", "shorterWords" },
+            { "onlyShortWords", "onlyShortWords"},
+            { "longerWords", "longerWords"},
+            { "onlyLongWords", "onlyLongWords" },
+
+            { "positiveMindset", "positiveMindset" },
+            { "romanticMindset", "romanticMindset" },
+
+            { "wordGrid", "wordGrid" },
+            { "rigidWords", "rigidWords" }
         };
 
     public static void setUpgrade(string upgradeName)
@@ -62,5 +92,21 @@ public static class Upgrades
             return upgradeCost[upgradeName];
         }
         return -1;
+    }
+    public static string getTitle(string upgradeName)
+    {
+        if (upgradeTitle.ContainsKey(upgradeName))
+        {
+            return upgradeTitle[upgradeName];
+        }
+        return "";
+    }
+    public static string getDescription(string upgradeName)
+    {
+        if (upgradeDescription.ContainsKey(upgradeName))
+        {
+            return upgradeDescription[upgradeName];
+        }
+        return "";
     }
 }
