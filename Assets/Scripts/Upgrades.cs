@@ -6,17 +6,17 @@ public static class Upgrades
 {
     private static Dictionary<string, bool> upgradeList = new Dictionary<string, bool>
         {
-            { "rightfulPay", false },
+            { "rightfulPay", true },
             { "shorterWords", false },
             { "onlyShortWords", false },
-            { "longerWords", false },
-            { "onlyLongWords", false },
+            { "longerWords", true },
+            { "onlyLongWords", true },
 
             { "positiveMindset", false },
             { "romanticMindset", false },
 
-            { "wordGrid", false },
-            { "rigidWords", false },
+            { "wordGrid", true },
+            { "rigidWords", true },
 
             { "betterCoffee", false },
             { "betterNap", false }
@@ -24,15 +24,17 @@ public static class Upgrades
 
     private static  Dictionary<string, int> upgradeCost = new Dictionary<string, int>
         {
-            { "onlyShortWords", 50 },
-            { "onlyLongWords", 50 },
-            { "rightfulPay", 50 },
+            { "rightfulPay", 100 },
+            { "shorterWords", 150 },
+            { "onlyShortWords", 250},
+            { "longerWords", 150 },
+            { "onlyLongWords", 250 },
 
-            { "positiveMindset", 50 },
-            { "romanticMindset", 50 },
+            { "positiveMindset", 100 },
+            { "romanticMindset", 100 },
 
-            { "wordGrid", 50 },
-            { "rigidWords", 50 },
+            { "wordGrid", 200 },
+            { "rigidWords", 100 },
 
             { "betterCoffee", 50 },
             { "betterNap", 50 }

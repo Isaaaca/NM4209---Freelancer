@@ -47,29 +47,28 @@ public class UpgradeButton : MonoBehaviour
 
     void Update()
     {
+        bool unlocked = true;
         if (activated||(precludingUpgrade != null && precludingUpgrade.isActivated()))
         {
-            button.interactable = false;
+            unlocked = false;
         }
 
         else if (lockingUpgrade != null && !activated)
         {
-            bool unlocked = lockingUpgrade.isActivated();
-            if (unlocked)
-            {
-                //TODO: Check enough money
-                if(Resources.money > Upgrades.getCost(upgradeName))
-                {
-                    button.interactable = true;
-                }
-                else
-                {
-                    //show not enough cash
-                    button.interactable = false;
-                }
-            }
+            unlocked = lockingUpgrade.isActivated();
+            
+        }
+
+        if (unlocked && Resources.money > Upgrades.getCost(upgradeName))
+        {
+            //TODO: Check enough money
+            button.interactable = true;
+
         }
         else
+        {
+            //show not enough cash
             button.interactable = false;
+        }
     }
 }

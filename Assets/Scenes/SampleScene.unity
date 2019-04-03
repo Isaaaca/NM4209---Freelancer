@@ -897,25 +897,26 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  drainSainityPerWord: 0
-  rightWordSanityDrain: 3
-  wrongWordSanityDrain: 5
+  drainSainityPerWord: 1
+  rightWordSanityDrain: 0
+  wrongWordSanityDrain: 2
   drainSanityOnKeypress: 1
-  sanityDrainPerKey: 0.5
+  sanityDrainPerKey: 1
   drainSanityOverTime: 0
   drainRate: 1.5
   cashReward: 5
   cashPenalty: 2
-  rentAmt: 100
+  rentAmt: 50
+  rentIncrease: 50
   dayDuration: 100
   startMoney: 20
   startSanity: 100
   nightSanity: 40
   coffeeSanity: 40
   coffeeMoney: 50
-  coffeeTime: 5
+  coffeeTime: 2
   napSanity: 40
-  napTime: 15
+  napTime: 10
   clock: {fileID: 1424767505}
   sanityBar: {fileID: 2138525150}
   cashDisplay: {fileID: 1999470551}

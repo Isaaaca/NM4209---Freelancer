@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public float cashReward;
     public float cashPenalty;
     public float rentAmt;
+    public float rentIncrease;
 
     [Header("Starting Amounts")]
     [SerializeField]
@@ -71,7 +72,9 @@ public class GameManager : MonoBehaviour
 
     public void StartDay()
     {
-        day++; 
+        day++;
+        if (day % 5 == 0)
+            rentAmt += rentIncrease;
         StartDayEvent.Invoke();
         dayTimeLeft = dayDuration;
         inputField.Select();
