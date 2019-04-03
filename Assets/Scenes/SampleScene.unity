@@ -4391,7 +4391,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -0, y: -96}
+  m_AnchoredPosition: {x: 0, y: -96}
   m_SizeDelta: {x: 637.2, y: 22.7}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1062549462
@@ -8123,21 +8123,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 466578951}
     m_Modifications:
-    - target: {fileID: 2465990486184518183, guid: c1ee2a72429a09e4ab5fae5317a3d98c,
-        type: 3}
-      propertyPath: OnHoverEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2465990486184518183, guid: c1ee2a72429a09e4ab5fae5317a3d98c,
-        type: 3}
-      propertyPath: OnHoverEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnHover
-      objectReference: {fileID: 0}
-    - target: {fileID: 2465990486184518183, guid: c1ee2a72429a09e4ab5fae5317a3d98c,
-        type: 3}
-      propertyPath: OnHoverEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
     - target: {fileID: 4692299092244268664, guid: c1ee2a72429a09e4ab5fae5317a3d98c,
         type: 3}
       propertyPath: m_Name
@@ -8272,6 +8257,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Text
       value: Rigid Words
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465990486184518183, guid: c1ee2a72429a09e4ab5fae5317a3d98c,
+        type: 3}
+      propertyPath: OnHoverEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465990486184518183, guid: c1ee2a72429a09e4ab5fae5317a3d98c,
+        type: 3}
+      propertyPath: OnHoverEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnHover
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465990486184518183, guid: c1ee2a72429a09e4ab5fae5317a3d98c,
+        type: 3}
+      propertyPath: OnHoverEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1ee2a72429a09e4ab5fae5317a3d98c, type: 3}
