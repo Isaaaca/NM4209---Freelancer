@@ -350,6 +350,7 @@ healthchecksdb
 [Ll]ibrary/
 [Tt]emp/
 [Bb]uild/
+!WebGL/Build
 [Bb]uilds/
 [Ll]ogs/
 
