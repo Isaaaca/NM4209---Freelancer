@@ -7,9 +7,12 @@ public static class Resources
     public static float money =20;
     public static float sanity;
     public static float rentAmt;
+    public static float affection;
+    public static int dayCounter;
 
     public static float daysEarnings=0;
     public static float daysBonus=0;
+    public static float daysDiscounts=0;
     public static float daysPenalty=0;
     public static int numRightWords=0;
     public static int numWrongWords = 0;

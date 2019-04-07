@@ -60,6 +60,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private Text dayDisplay;
     [SerializeField]
+    private GameObject pauseScreen;
+    [SerializeField]
     private SummaryPanel summaryPanel;
 
     [SerializeField]
@@ -68,10 +70,10 @@ public class GameManager : MonoBehaviour
     
     private float lastRightWordTime =0;
     private float spentSanity = 0;
-    private int day =0;
 
     private bool hitBackspace = false;
     private bool isDay;
+    private bool paused = false;
 
     // Start is called before the first frame update
     void Start()
@@ -89,13 +91,12 @@ public class GameManager : MonoBehaviour
         Resources.money = startMoney;
         cashDisplay.Refresh();
         Resources.rentAmt = startRentAmt;
-        StartDay();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isDay)
+        if (isDay && !paused)
         {
             DecreaseTime(Time.deltaTime);
             if (dayTimeLeft <= 0) EndDayEvent.Invoke();
@@ -135,11 +136,11 @@ public class GameManager : MonoBehaviour
 
     public void StartDay()
     {
-        day++;
+        Resources.dayCounter++;
         StartDayEvent.Invoke();
         dayTimeLeft = dayDuration;
         inputField.Select();
-        dayDisplay.text = "Day " + day.ToString();
+        dayDisplay.text = "Day " + Resources.dayCounter.ToString();
         isDay = true;
         Resources.daysEarnings = 0;
         Resources.daysBonus = 0;
@@ -151,6 +152,7 @@ public class GameManager : MonoBehaviour
     void OnEndDay()
     {
         isDay = false;
+        PayRent();
         System.Text.StringBuilder builder = new System.Text.StringBuilder();
         if (dayTimeLeft > 0)
         {
@@ -161,12 +163,15 @@ public class GameManager : MonoBehaviour
         {
             builder.Append("Yet another day passes.\n");
         }
-        if (day % 5 == 0)
+        if (Resources.dayCounter % 5 == 0)
         {
             builder.Append("Landlady increased the rent. Again.\n");
             Resources.rentAmt += rentIncrease;
         }
-        PayRent();
+        if (Resources.money < 0)
+        {
+            builder.Append("You don't have enough to pay rent. You'll have to pawn something off.\n");
+        }
         summaryPanel.Set(builder.ToString());
         Resources.IncreaseSanity(nightSanity);
     }
@@ -209,7 +214,11 @@ public class GameManager : MonoBehaviour
             Resources.IncreaseSanity(spentSanity * 0.5f);
 
         }
+        else if(Upgrades.hasUpgrade("romanticMindset"))
+        {
+            Resources.daysDiscounts+= wordLen* 0.2f;
 
+        }
         spentSanity = 0;
         Resources.daysEarnings += pay;
         Resources.daysBonus += bonus;
@@ -264,4 +273,26 @@ public class GameManager : MonoBehaviour
         dayTimeLeft = Mathf.Clamp(dayTimeLeft - amt, 0f, 100f);
 
     }
+
+    public void TogglePause()
+    {
+        if (!paused)
+        {
+            pauseScreen.SetActive(true);
+            Time.timeScale = 0;
+            inputField.interactable = false;
+            paused = true;
+            
+        }
+        else
+        {
+            pauseScreen.SetActive(false);
+            Time.timeScale = 1;
+            inputField.interactable = true;
+            inputField.ActivateInputField();
+            paused = false;
+        }
+
+    }
+
 }

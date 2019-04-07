@@ -42,32 +42,32 @@ public static class Upgrades
 
     private static  Dictionary<string, string> upgradeTitle = new Dictionary<string, string>
         {
-            { "rightfulPay", "rightfulPay" },
-            { "shorterWords", "shorterWords" },
-            { "onlyShortWords", "onlyShortWords"},
-            { "longerWords", "longerWords"},
-            { "onlyLongWords", "onlyLongWords" },
+            { "rightfulPay", "Pricing Your Work: Getting Your Rightful Pay" },
+            { "shorterWords", "Abandon Tiresome Work" },
+            { "onlyShortWords", "Machine Gun Efficiency"},
+            { "longerWords", "Choosing What's Worth"},
+            { "onlyLongWords", "Tackling the Niche Market" },
 
-            { "positiveMindset", "positiveMindset" },
-            { "romanticMindset", "romanticMindset" },
+            { "positiveMindset", "Positive Thinking" },
+            { "romanticMindset", "Poems for Romance" },
 
-            { "wordGrid", "wordGrid" },
-            { "rigidWords", "rigidWords" }
+            { "wordGrid", "Organising: Finding Your Alignment" },
+            { "rigidWords", "Organising: Straightening Your Topsy-Turvy Life" }
         };
 
     private static  Dictionary<string, string> upgradeDescription = new Dictionary<string, string>
         {
-            { "rightfulPay", "rightfulPay" },
-            { "shorterWords", "shorterWords" },
-            { "onlyShortWords", "onlyShortWords"},
-            { "longerWords", "longerWords"},
-            { "onlyLongWords", "onlyLongWords" },
+            { "rightfulPay", "Effect: Get X2 pay for words of 8 letters or more, X3 for words of 12 letters or more." },
+            { "shorterWords", "Effect: All words will be at most 8 letters long." },
+            { "onlyShortWords", "Effect: All words will be at most 6 letters long. 40% Bonus pay if a correct word is submitted within 2secs of the previous word."},
+            { "longerWords", "Effect: All words will be at least 6 letters long. 20% Bonus pay if a word is at least 8 letters."},
+            { "onlyLongWords", "Effect: All Words will be at least 8 letters long. 60% Bonus pay if no backspace is used for a correct word." },
 
-            { "positiveMindset", "positiveMindset" },
+            { "positiveMindset", "Effect: On submission, recover 50% of the sanity expended on a word, given it is correct." },
             { "romanticMindset", "romanticMindset" },
 
-            { "wordGrid", "wordGrid" },
-            { "rigidWords", "rigidWords" }
+            { "wordGrid", "Effect: Falling words will be aligned." },
+            { "rigidWords", "Effect: Words no longer rotate when falling." }
         };
 
     public static void setUpgrade(string upgradeName)

@@ -51,6 +51,7 @@ public class WordManager : MonoBehaviour
     void Start()
     {
         activeWords = new SortedList<string, GameObject>();
+        this.enabled = false;
     }
 
     // Update is called once per frame

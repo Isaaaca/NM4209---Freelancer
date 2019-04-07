@@ -13,7 +13,7 @@ public class DescriptionPanel : MonoBehaviour, IHasChanged
     [SerializeField]
     Text cost;
     [SerializeField]
-    Text sellPrice;
+    Text pawnPrice;
     [SerializeField]
     Text description;
 
@@ -23,7 +23,7 @@ public class DescriptionPanel : MonoBehaviour, IHasChanged
     {
         title.text = "";
         cost.text = "";
-        sellPrice.text = "";
+        pawnPrice.text = "";
         description.text = "";
         defaultSprite = image.sprite;
     }
@@ -37,16 +37,27 @@ public class DescriptionPanel : MonoBehaviour, IHasChanged
     {
         GameObject hovered = Hoverable.current.hoverObject;
         UpgradeButton upgrade = hovered.GetComponent<UpgradeButton>();
+        Item item = hovered.GetComponent<Item>();
         if(upgrade!= null)
         {
             string upgradeName = upgrade.upgradeName;
             print(upgradeName);
             title.text = Upgrades.getTitle(upgradeName);
             cost.text = "$" + Upgrades.getCost(upgradeName).ToString();
-            sellPrice.text = "";
+            pawnPrice.text = "";
             description.text = Upgrades.getDescription(upgradeName);
             image.sprite = upgrade.GetSprite();
 
+        }
+        else if(item != null)
+        {
+            string itemName = item.getItemName();
+            print(itemName);
+            title.text = itemName;
+            cost.text = "$" + ItemInfo.itemStats[itemName]["sellPrice"].ToString();
+            pawnPrice.text = "$" + ItemInfo.itemStats[itemName]["pawnPrice"].ToString();
+            description.text = ItemInfo.itemDescription[itemName];
+            image.sprite = item.GetSprite();
         }
         
     }
@@ -55,7 +66,7 @@ public class DescriptionPanel : MonoBehaviour, IHasChanged
     {
         title.text = "";
         cost.text = "";
-        sellPrice.text = "";
+        pawnPrice.text = "";
         description.text = "";
         image.sprite = defaultSprite;
     }

@@ -12,6 +12,7 @@ public class Hoverable : MonoBehaviour, IPointerEnterHandler
     // Start is called before the first frame update
     void Start()
     {
+        hoverObject = this.gameObject;
     }
 
     // Update is called once per frame
@@ -23,6 +24,5 @@ public class Hoverable : MonoBehaviour, IPointerEnterHandler
     {
         current = this;
         ExecuteEvents.ExecuteHierarchy<IHasChanged>(gameObject, null, (x, y) => x.HasChanged());
-        print(this.name);
     }
 }
