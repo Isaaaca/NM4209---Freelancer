@@ -64,7 +64,7 @@ public static class Upgrades
             { "onlyLongWords", "Effect: All Words will be at least 8 letters long. 60% Bonus pay if no backspace is used for a correct word." },
 
             { "positiveMindset", "Effect: On submission, recover 50% of the sanity expended on a word, given it is correct." },
-            { "romanticMindset", "romanticMindset" },
+            { "romanticMindset", "Effect: Recieve a small discount at the store for every letter in a correct word." },
 
             { "wordGrid", "Effect: Falling words will be aligned." },
             { "rigidWords", "Effect: Words no longer rotate when falling." }

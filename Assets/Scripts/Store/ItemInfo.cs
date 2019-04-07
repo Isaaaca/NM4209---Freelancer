@@ -13,7 +13,7 @@ public static class ItemInfo
                 { "pawnPrice", 2f},
                 { "startStoreStock", 120f},
                 { "startInventory", 0f},
-                { "sellOutRate", 1.5f},
+                { "sellOutRate", 2.5f},
                 { "affectionModifier", 0.001f}
             }
         },
@@ -43,7 +43,7 @@ public static class ItemInfo
                 { "pawnPrice", 80f},
                 { "startStoreStock", 05f},
                 { "startInventory", 00f},
-                { "sellOutRate", 0.3f},
+                { "sellOutRate", 0.5f},
                 { "affectionModifier", 0.04f}
             }
         },
@@ -53,7 +53,7 @@ public static class ItemInfo
                 { "pawnPrice", 30f},
                 { "startStoreStock", 15f},
                 { "startInventory", 00f},
-                { "sellOutRate", 0.5f},
+                { "sellOutRate", 1f},
                 { "affectionModifier", 0.02f}
             }
         },

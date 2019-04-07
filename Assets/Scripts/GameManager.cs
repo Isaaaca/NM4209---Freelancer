@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour
         }
         else if(Upgrades.hasUpgrade("romanticMindset"))
         {
-            Resources.daysDiscounts+= wordLen* 0.2f;
+            Resources.daysDiscounts+= wordLen* 0.1f;
 
         }
         spentSanity = 0;
