@@ -55,6 +55,13 @@ public class BuySellBox : MonoBehaviour
     public void OnConfirm()
     {
         store.MakeTransaction(currAmt, totalPrice);
+        if (buying)
+        {
+            if (Resources.daysDiscounts > totalPrice)
+                Resources.daysDiscounts -= totalPrice;
+            else
+                Resources.daysDiscounts = 0;
+        }
     }
     // Start is called before the first frame update
     void Start()
@@ -86,7 +93,10 @@ public class BuySellBox : MonoBehaviour
         if (buying && Resources.money - totalPrice < price)
             upButton.interactable = false;
         amtTxt.text = currAmt.ToString();
-        totalPrice = currAmt * price - Mathf.Floor(Resources.daysDiscounts);
+        if (buying)
+            totalPrice = currAmt * price - Mathf.Floor(Resources.daysDiscounts);
+        else
+            totalPrice = currAmt * price;
         totalPriceTxt.text = totalPrice.ToString();
     }
 }
