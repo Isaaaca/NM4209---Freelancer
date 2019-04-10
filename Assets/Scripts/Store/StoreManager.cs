@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class StoreManager : MonoBehaviour, IStoreInteraction
 {
@@ -11,6 +12,8 @@ public class StoreManager : MonoBehaviour, IStoreInteraction
     private Inventory storeIven;
     [SerializeField]
     private Inventory playerInven;
+    [SerializeField]
+    private Text affectionDisplay;
 
     public void OnStoreInteraction()
     {
@@ -35,6 +38,9 @@ public class StoreManager : MonoBehaviour, IStoreInteraction
             playerInven.DecreaseItem(itemName, amt);
             storeIven.IncreaseItem(itemName, amt);
         }
+
+        playerInven.OnGameEnd();
+        affectionDisplay.text = (Resources.affection *100).ToString("0")+"%";
     }
 }
 

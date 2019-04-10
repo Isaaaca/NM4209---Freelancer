@@ -157,7 +157,7 @@ public class GameManager : MonoBehaviour
         if (dayTimeLeft > 0)
         {
             //show dialogue for day ending due to sanity 
-            builder.Append("You got fed up with work and spent the rest of the day on Netflix. Remember to take breaks next time.\n");
+            builder.Append("You got fed up with work and wasted the rest of the day.\n");
         }
         else
         {
