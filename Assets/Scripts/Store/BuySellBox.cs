@@ -9,6 +9,7 @@ public class BuySellBox : MonoBehaviour
     private int currAmt;
     private float price;
     private float totalPrice;
+    private float aftDiscount = 0;
     [SerializeField]
     private StoreManager store;
     
@@ -54,7 +55,7 @@ public class BuySellBox : MonoBehaviour
 
     public void OnConfirm()
     {
-        store.MakeTransaction(currAmt, totalPrice);
+        store.MakeTransaction(currAmt, aftDiscount);
         if (buying)
         {
             if (Resources.daysDiscounts > totalPrice)
@@ -82,7 +83,7 @@ public class BuySellBox : MonoBehaviour
 
     public void OnChange()
     {
-        float aftDiscount = 0;
+        
         totalPrice = currAmt * price;
         if (buying)
         {
