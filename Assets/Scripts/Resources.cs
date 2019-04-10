@@ -8,7 +8,7 @@ public static class Resources
     public static float sanity;
     public static float rentAmt;
     public static float affection;
-    public static int dayCounter=28;
+    public static int dayCounter=0;
 
     public static float daysEarnings=0;
     public static float daysBonus=0;
