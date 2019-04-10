@@ -55,7 +55,7 @@ public class DescriptionPanel : MonoBehaviour, IHasChanged
             print(itemName);
             title.text = itemName;
             cost.text = "$" + ItemInfo.itemStats[itemName]["sellPrice"].ToString();
-            pawnPrice.text = "$" + ItemInfo.itemStats[itemName]["pawnPrice"].ToString();
+            pawnPrice.text = "Pawn: $" + ItemInfo.itemStats[itemName]["pawnPrice"].ToString();
             description.text = ItemInfo.itemDescription[itemName];
             image.sprite = item.GetSprite();
         }
