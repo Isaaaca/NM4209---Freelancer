@@ -44,7 +44,7 @@ public static class ItemInfo
                 { "startStoreStock", 05f},
                 { "startInventory", 00f},
                 { "sellOutRate", 0.5f},
-                { "affectionModifier", 0.04f}
+                { "affectionModifier", 0.05f}
             }
         },
 
@@ -54,7 +54,7 @@ public static class ItemInfo
                 { "startStoreStock", 15f},
                 { "startInventory", 00f},
                 { "sellOutRate", 1f},
-                { "affectionModifier", 0.02f}
+                { "affectionModifier", 0.03f}
             }
         },
 
