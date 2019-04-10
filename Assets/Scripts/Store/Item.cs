@@ -35,7 +35,7 @@ public class Item : MonoBehaviour
 
     void Update()
     {
-        if (!inStore || Resources.money > sellPrice)
+        if (!inStore || Resources.money > sellPrice-Resources.daysDiscounts)
         {
             //TODO: Check enough money
             button.interactable = true;
