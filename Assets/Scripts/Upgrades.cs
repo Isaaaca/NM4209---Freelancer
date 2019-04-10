@@ -24,14 +24,14 @@ public static class Upgrades
 
     private static  Dictionary<string, int> upgradeCost = new Dictionary<string, int>
         {
-            { "rightfulPay", 100 },
-            { "shorterWords", 150 },
+            { "rightfulPay", 120 },
+            { "shorterWords", 200 },
             { "onlyShortWords", 250},
-            { "longerWords", 150 },
+            { "longerWords", 200 },
             { "onlyLongWords", 250 },
 
-            { "positiveMindset", 100 },
-            { "romanticMindset", 100 },
+            { "positiveMindset", 150 },
+            { "romanticMindset", 150 },
 
             { "wordGrid", 200 },
             { "rigidWords", 100 },
