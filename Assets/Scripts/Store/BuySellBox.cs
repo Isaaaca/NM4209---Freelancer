@@ -82,21 +82,19 @@ public class BuySellBox : MonoBehaviour
 
     public void OnChange()
     {
-        if (currAmt <= 1)
-            downButton.interactable = false;
-        else
-            downButton.interactable = true;
-        if (currAmt >= max)
-            upButton.interactable = false;
-        else
-            upButton.interactable = true;
-        if (buying && Resources.money - totalPrice < price)
-            upButton.interactable = false;
-        amtTxt.text = currAmt.ToString();
         if (buying)
             totalPrice = currAmt * price - Mathf.Floor(Resources.daysDiscounts);
         else
             totalPrice = currAmt * price;
+        upButton.interactable = true;
+        downButton.interactable = true;
+        if (currAmt <= 1)
+            downButton.interactable = false;
+        if (currAmt >= max)
+            upButton.interactable = false;
+        if (buying && Resources.money - totalPrice < price)
+            upButton.interactable = false;
+        amtTxt.text = currAmt.ToString();
         totalPriceTxt.text = totalPrice.ToString();
     }
 }
