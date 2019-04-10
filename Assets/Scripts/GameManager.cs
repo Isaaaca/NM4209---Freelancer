@@ -159,6 +159,10 @@ public class GameManager : MonoBehaviour
             //show dialogue for day ending due to sanity 
             builder.Append("You got fed up with work and wasted the rest of the day.\n");
         }
+        else if (Resources.dayCounter >= 30)
+        {
+            builder.Append("Tomorrow's the big day! Time to prepare as much as possible.\n");
+        }
         else
         {
             builder.Append("Yet another day passes.\n");
