@@ -68,7 +68,7 @@ public static class ItemInfo
         { "Ring", "Must-have for any proposal."},
         { "Shoe", "You've always liked seeing her in heels. She has always been happy to oblige."},
         { "Bag", "Women always complain that there's no space in their purses but truth is they don't want anything bigger. They want you to carry things for them."},
-        { "Mom's Necklace", "It's really not your girlfriend's style, but it's Mom's parting gift for your future wife. May she rest in peace."},
+        { "Mom's Necklace", "Mom's parting gift for your future wife. May she rest in peace. Your girlfriend hates it though. "},
 
     };
 }

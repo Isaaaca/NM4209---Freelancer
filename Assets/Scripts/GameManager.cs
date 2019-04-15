@@ -123,6 +123,15 @@ public class GameManager : MonoBehaviour
             {
                 hitBackspace = true;
             }
+
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                OnNap();
+            }
+            else if (Input.GetKeyDown(KeyCode.RightShift))
+            {
+                OnCoffee();
+            }
         }
 
 
@@ -140,7 +149,7 @@ public class GameManager : MonoBehaviour
         StartDayEvent.Invoke();
         dayTimeLeft = dayDuration;
         inputField.Select();
-        dayDisplay.text = "Day " + Resources.dayCounter.ToString();
+        dayDisplay.text = "Day " + Resources.dayCounter.ToString()+"/30";
         isDay = true;
         Resources.daysEarnings = 0;
         Resources.daysBonus = 0;
@@ -242,7 +251,7 @@ public class GameManager : MonoBehaviour
 
     public void OnCoffee()
     {
-        if (Resources.money > coffeeMoney)
+        if (Resources.money >= coffeeMoney)
         {
             Resources.IncreaseSanity(coffeeSanity);
             Resources.DecreaseMoney(coffeeMoney);

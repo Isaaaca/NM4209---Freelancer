@@ -38,4 +38,13 @@ public class PanelControl : MonoBehaviour
         }
 
     }
+
+    public void TogglePanel()
+    {
+        Animator animator = GetComponent<Animator>();
+        if (animator.GetBool("open"))
+            ClosePanel();
+        else
+            OpenPanel();
+    }
 }

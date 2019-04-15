@@ -40,7 +40,7 @@ public class StoreManager : MonoBehaviour, IStoreInteraction
         }
 
         playerInven.OnGameEnd();
-        affectionDisplay.text = (Resources.affection *100).ToString("0")+"%";
+        affectionDisplay.text = (Mathf.Clamp(Resources.affection *200,0, float.MaxValue)).ToString("0")+"%";
     }
 }
 
