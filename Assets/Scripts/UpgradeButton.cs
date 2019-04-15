@@ -35,6 +35,9 @@ public class UpgradeButton : MonoBehaviour
         Resources.DecreaseMoney(Upgrades.getCost(upgradeName));
         activated = true;
         button.interactable = false;
+        ColorBlock color= button.colors;
+        color.disabledColor = new Color(0.592f, 0.831f, 0.741f);
+        button.colors = color;
         //SHOW UI for Bought
     }
 
