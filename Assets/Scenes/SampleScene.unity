@@ -3762,6 +3762,7 @@ GameObject:
   m_Component:
   - component: {fileID: 273111532}
   - component: {fileID: 273111533}
+  - component: {fileID: 273111534}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3964,6 +3965,114 @@ MonoBehaviour:
   pauseScreen: {fileID: 153626381}
   summaryPanel: {fileID: 273907651}
   inputField: {fileID: 682718552}
+  typingSounds:
+  - {fileID: 8300000, guid: ac85fffeac78cf441a5d2b9541b7d57f, type: 3}
+  - {fileID: 8300000, guid: 4f6a347244e14e34fbf061f2a65e83fa, type: 3}
+  - {fileID: 8300000, guid: b42b0a41f283c9d458ffdd47fec8d9e8, type: 3}
+  - {fileID: 8300000, guid: 5b8680f6a123a7642b59ab1eab8152a3, type: 3}
+  - {fileID: 8300000, guid: 8c1b4d2255859a7428dceb14bf32bc56, type: 3}
+  - {fileID: 8300000, guid: 1a7db5c22a0d0e444a59964306d62252, type: 3}
+  - {fileID: 8300000, guid: 8a587798183f89e45b86aba78d2feeae, type: 3}
+  - {fileID: 8300000, guid: 824be088fb57bf3499d0f64cd7a63ac7, type: 3}
+  - {fileID: 8300000, guid: 740d96d77e9061449a6e7b885b7d8455, type: 3}
+  - {fileID: 8300000, guid: ba8058f34991f16469e62b93d9e372ca, type: 3}
+  audioPlayer: {fileID: 273111534}
+--- !u!82 &273111534
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273111531}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &273907647
 GameObject:
   m_ObjectHideFlags: 0
@@ -21215,7 +21324,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1.5
   m_Text: "Designer: Agatha\nProducer: Geraldine\nAssets: Max\nProgrammer: Isaac\nFont:
-    Pixel12x10 by \rCorne2Plum3"
+    Pixel12x10 by \rCorne2Plum3\nFree sound effects from https://www.fesliyanstudios.com"
 --- !u!222 &2066917345
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22440,6 +22549,17 @@ PrefabInstance:
       propertyPath: m_Text
       value: Rigid Words
       objectReference: {fileID: 0}
+    - target: {fileID: 4692299092244268667, guid: c1ee2a72429a09e4ab5fae5317a3d98c,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e77f359136c5a74ead4417e18eac8d8,
+        type: 3}
+    - target: {fileID: 4692299092244268667, guid: c1ee2a72429a09e4ab5fae5317a3d98c,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2465990486184518183, guid: c1ee2a72429a09e4ab5fae5317a3d98c,
         type: 3}
       propertyPath: OnHoverEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -22454,17 +22574,6 @@ PrefabInstance:
         type: 3}
       propertyPath: OnHoverEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4692299092244268667, guid: c1ee2a72429a09e4ab5fae5317a3d98c,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 5e77f359136c5a74ead4417e18eac8d8,
-        type: 3}
-    - target: {fileID: 4692299092244268667, guid: c1ee2a72429a09e4ab5fae5317a3d98c,
-        type: 3}
-      propertyPath: m_Type
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1ee2a72429a09e4ab5fae5317a3d98c, type: 3}

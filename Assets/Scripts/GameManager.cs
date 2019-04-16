@@ -67,6 +67,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     InputField inputField;
     private float dayTimeLeft;
+
+    [SerializeField]
+    private AudioClip[] typingSounds;
+    [SerializeField]
+    private AudioSource audioPlayer;
     
     private float lastRightWordTime =0;
     private float spentSanity = 0;
@@ -113,10 +118,14 @@ public class GameManager : MonoBehaviour
                 EndDayEvent.Invoke();
             }
 
-            if (drainSanityOnKeypress && Input.inputString != "")
+            if (Input.inputString != "")
             {
-                Resources.DecreaseSanity(sanityDrainPerKey);
-                spentSanity += sanityDrainPerKey;
+                audioPlayer.PlayOneShot(typingSounds[Random.Range(0, typingSounds.Length)]);
+                if (drainSanityOnKeypress)
+                {
+                    Resources.DecreaseSanity(sanityDrainPerKey);
+                    spentSanity += sanityDrainPerKey;
+                }
             }
 
             if (Input.GetKey(KeyCode.Backspace))
